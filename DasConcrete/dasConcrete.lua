@@ -136,8 +136,12 @@ function constructConcrete(dye, amount)
         splitSlotTo(5, 7)
         splitSlotTo(6, 10)
 
+        local dyeCountStart = turtle.getItemCount(11)
+
         turtle.select(16)
         turtle.craft(math.min(8, math.ceil((amount - amountMade) / 8)))
+
+        local dyeCountEnd = turtle.getItemCount(11)
 
         local powderLeft = turtle.getItemCount(16)
         while (powderLeft > 0) do
@@ -183,12 +187,11 @@ function constructConcrete(dye, amount)
             powderLeft = turtle.getItemCount(16)
         end
 
-        while (sandCount > 3 and gravelCount > 3 and dyeCount > 0) do
-            sandCount = sandCount - 4
-            gravelCount = gravelCount - 4
-            dyeCount = dyeCount - 1
-            amountMade = amountMade + 8
-        end
+        local groupsMade = dyeCountStart - dyeCountEnd
+        sandCount = sandCount - 4 * groupsMade
+        gravelCount = gravelCount - 4 * groupsMade
+        dyeCount = dyeCount - groupsMade
+        amountMade = amountMade + 8 * groupsMade
 
         if (amountMade < amount) then
             print("Waiting for materials..")
