@@ -125,7 +125,7 @@ local function Tortoise()
                 if not self:faceTo(SOUTH) then
                     return false
                 end
-                if (self.location[2] < location[2] and self:forward()) or (self.location[2] > location[2] and self:back()) then
+                if (self.location[3] < location[3] and self:forward()) or (self.location[3] > location[3] and self:back()) then
                     workDone = true
                 end
             end
