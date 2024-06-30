@@ -10,15 +10,15 @@ local function Tortoise()
     }
 
     function self:turnLeft()
-        -- if turtle.turnLeft() then
+        if turtle.turnLeft() then
             self.direction = (self.direction - 1) % 4
-        -- end
+        end
     end
 
     function self:turnRight()
-        -- if turtle.turnRight() then
+        if turtle.turnRight() then
             self.direction = (self.direction + 1) % 4
-        -- end
+        end
     end
 
     return self
