@@ -55,7 +55,7 @@ local function Tortoise()
     end
 
     function self:back()
-        if not turtle.back() and not (self:refuel(FUEL_BUFFER) and turtle.forward()) then
+        if not turtle.back() and not (self:refuel(FUEL_BUFFER) and turtle.back()) then
             return false
         end
         if self.direction == NORTH then
@@ -78,7 +78,7 @@ local function Tortoise()
     end
 
     function self:down()
-        if not turtle.down() and not (self:refuel(FUEL_BUFFER) and turtle.up()) then
+        if not turtle.down() and not (self:refuel(FUEL_BUFFER) and turtle.down()) then
             return false
         end
         self.location[2] = self.location[2] - 1
