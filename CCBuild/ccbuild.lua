@@ -5,7 +5,7 @@ local args = {...}
 local function loadFromPath(path, includedPaths)
     local page = http.get(path)
     local out = ""
-    for line in page.readLine() do
+    for line in page.readLine do
         if string.sub(line, 1, 3) == "---" then
             if string.sub(line, 1, 11) == "---include " then
                 line = string.sub(line, 12)
