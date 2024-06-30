@@ -75,6 +75,7 @@ local function Tortoise()
             return false
         end
         self.location[2] = self.location[2] + 1
+        return true
     end
 
     function self:down()
@@ -82,6 +83,7 @@ local function Tortoise()
             return false
         end
         self.location[2] = self.location[2] - 1
+        return true
     end
 
     function self:setLocation(location, direction)
