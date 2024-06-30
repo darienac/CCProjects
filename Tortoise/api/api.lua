@@ -86,7 +86,7 @@ local function Tortoise()
 
     function self:setLocation(location, direction)
         self.location = table.pack(table.unpack(location))
-        self.direction = table.pack(table.unpack(direction))
+        self.direction = direction
     end
 
     function self:faceTo(direction)
