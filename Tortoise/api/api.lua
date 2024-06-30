@@ -7,8 +7,35 @@ local function Tortoise()
 
     local self = {
         ["location"]={0,0,0},
-        ["direction"]=NORTH
+        ["direction"]=NORTH,
+        ["configPath"]=".tortoise"
     }
+
+    function self:save()
+        local f = fs.open(self.configPath, "w")
+        f.writeLine("location " .. self.location[1] .. " " .. self.location[2] .. " " .. self.location[3])
+        f.writeLine("direction " .. self.direction)
+        f.close()
+    end
+
+    function self:load()
+        local f = fs.open(self.configPath, "r")
+        if not f then
+            return
+        end
+        for line in f.readLine do
+            local args = {}
+            for word in string.gmatch(line, "([^%s]+)") do
+                table.insert(args, word)
+            end
+            if args[1] == "location" then
+                self.location = {tonumber(args[2]), tonumber(args[3]), tonumber(args[4])}
+            elseif args[1] == "direction" then
+                self.direction = tonumber(args[2])
+            end
+        end
+        f.close()
+    end
 
     function self:refuel(minAmount)
         local startLevel = turtle.getFuelLevel()
@@ -25,6 +52,7 @@ local function Tortoise()
     function self:turnLeft()
         if turtle.turnLeft() then
             self.direction = (self.direction - 1) % 4
+            self:save()
             return true
         end
         return false
@@ -33,6 +61,7 @@ local function Tortoise()
     function self:turnRight()
         if turtle.turnRight() then
             self.direction = (self.direction + 1) % 4
+            self:save()
             return true
         end
         return false
@@ -51,6 +80,7 @@ local function Tortoise()
         elseif self.direction == WEST then
             self.location[1] = self.location[1] - 1
         end
+        self:save()
         return true
     end
 
@@ -67,6 +97,7 @@ local function Tortoise()
         elseif self.direction == WEST then
             self.location[1] = self.location[1] + 1
         end
+        self:save()
         return true
     end
 
@@ -75,6 +106,7 @@ local function Tortoise()
             return false
         end
         self.location[2] = self.location[2] + 1
+        self:save()
         return true
     end
 
@@ -83,12 +115,14 @@ local function Tortoise()
             return false
         end
         self.location[2] = self.location[2] - 1
+        self:save()
         return true
     end
 
     function self:setLocation(location, direction)
         self.location = table.pack(table.unpack(location))
         self.direction = direction
+        self:save()
     end
 
     function self:faceTo(direction)
@@ -140,6 +174,8 @@ local function Tortoise()
         end
         return true
     end
+
+    self:load()
 
     return self
 end
