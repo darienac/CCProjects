@@ -107,31 +107,31 @@ local function Tortoise()
         local yDone = location[2] == self.location[2]
         local zDone = location[3] == self.location[3]
         while (not xDone) or (not yDone) or (not zDone) do
+            local workDone = false
             if not xDone then
                 if not self:faceTo(EAST) then
                     return false
                 end
                 if (self.location[1] < location[1] and self:forward()) or (self.location[1] > location[1] and self:back()) then
-                    goto continue
+                    workDone = true
                 end
             end
-            if not yDone then
+            if not workDone and not yDone then
                 if (self.location[2] < location[2] and self:up()) or (self.location[2] > location[2] and self:down()) then
-                    goto continue
+                    workDone = true
                 end
             end
-            if not zDone then
+            if not workDone and not zDone then
                 if not self:faceTo(SOUTH) then
                     return false
                 end
                 if (self.location[2] < location[2] and self:forward()) or (self.location[2] > location[2] and self:back()) then
-                    goto continue
+                    workDone = true
                 end
             end
-            if true then
+            if not workDone then
                 return false
             end
-            ::continue::
             xDone = location[1] == self.location[1]
             yDone = location[2] == self.location[2]
             zDone = location[3] == self.location[3]
