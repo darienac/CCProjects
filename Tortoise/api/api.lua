@@ -148,8 +148,8 @@ local function Tortoise()
     end
 
     function self:setHome(location, direction, refuel, store)
-        self.location = table.pack(table.unpack(location))
-        self.direction = direction
+        self.homeLocation = table.pack(table.unpack(location))
+        self.homeDirection = direction
         self.homeRefuelName = refuel
         self.homeStoreName = store
         self:save()
