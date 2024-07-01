@@ -295,6 +295,15 @@ local function Tortoise()
         return self:moveTo(location)
     end
 
+    function self:isFull()
+        for i = 1,16 do
+            if turtle.getItemCount(i) == 0 then
+                return false
+            end
+        end
+        return true
+    end
+
     self:load()
 
     return self
