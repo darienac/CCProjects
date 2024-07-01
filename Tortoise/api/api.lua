@@ -14,7 +14,7 @@ local function Tortoise()
         ["homeDirection"]=NORTH,
         ["homeRefuelName"]="back",
         ["homeStoreName"]="back",
-        ["refuelMax"]=90000,
+        ["refuelMax"]=turtle.getFuelLimit() * 0.9,
         ["configPath"]=".tortoise"
     }
 
