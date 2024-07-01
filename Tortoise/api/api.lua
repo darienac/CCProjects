@@ -308,5 +308,3 @@ local function Tortoise()
 
     return self
 end
-
-_G.t = Tortoise()
