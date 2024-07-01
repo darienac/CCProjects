@@ -11,7 +11,7 @@ local function loadFromPath(path, includedPaths)
                 line = string.sub(line, 12)
                 if not includedPaths[line] then
                     includedPaths[line] = true
-                    out = out .. "\n" .. loadFromPath(line, includedPaths)
+                    out = out .. "\n" .. loadFromPath(fs.combine(path, line), includedPaths)
                 end
             end
         else
