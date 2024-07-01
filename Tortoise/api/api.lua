@@ -272,7 +272,7 @@ local function Tortoise()
             return true
         end
         for i = 1, helperStore.size() do
-            if (helperStore.getItemDetail(i) == nil) and not helperStore.pushItems(self.homeStoreName, i) then
+            if (helperStore.getItemDetail(i) ~= nil) and not helperStore.pushItems(self.homeStoreName, i) then
                 return true
             end
         end
