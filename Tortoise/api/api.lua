@@ -224,9 +224,8 @@ local function Tortoise()
         if turtle.getItemCount(16) > 0 then
             return false
         end
-        turtle.select(16)
         while turtle.getFuelLevel() < self.refuelMax and turtle.suckDown() do
-            turtle.refuel()
+            self:refuel(self.refuelMax)
         end
         if turtle.getFuelLevel() >= self.refuelMax then
             return true
@@ -248,7 +247,7 @@ local function Tortoise()
                 break
             end
             while turtle.suckDown() do
-                turtle.refuel()
+                turtle.refuel(self.refuelMax)
             end
         end
         return true
@@ -264,7 +263,7 @@ local function Tortoise()
         end
         for i = 1,16 do
             turtle.select(i)
-            if not turtle.dropDown() then
+            if turtle.getItemCount(i) > 0 and not turtle.dropDown() then
                 return false
             end
         end
@@ -273,7 +272,7 @@ local function Tortoise()
             return true
         end
         for i = 1, helperStore.size() do
-            if not helperStore.pushItems(self.homeStoreName, i) then
+            if (helperStore.getItemDetail(i) == nil) and not helperStore.pushItems(self.homeStoreName, i) then
                 return true
             end
         end
