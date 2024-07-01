@@ -8,10 +8,11 @@ local function loadFromPath(path, includedPaths)
     for line in page.readLine do
         if string.sub(line, 1, 3) == "---" then
             if string.sub(line, 1, 11) == "---include " then
-                line = string.sub(line, 12)
+                line = fs.combine(path, "..", string.sub(line, 12))
+                print(line)
                 if not includedPaths[line] then
                     includedPaths[line] = true
-                    out = out .. "\n" .. loadFromPath(fs.combine(path, "..", line), includedPaths)
+                    out = out .. "\n" .. loadFromPath(line, includedPaths)
                 end
             end
         else
