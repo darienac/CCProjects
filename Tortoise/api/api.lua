@@ -152,6 +152,7 @@ local function Tortoise()
         self.direction = direction
         self.homeRefuelName = refuel
         self.homeStoreName = store
+        self:save()
     end
 
     function self:distanceBetween(loc1, loc2)
