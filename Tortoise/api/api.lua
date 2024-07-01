@@ -280,7 +280,7 @@ local function Tortoise()
     end
 
     function self:makeTripTo(location, allowDeposit)
-        if self:refuel(self:distanceTo(location) + self:distanceBetween(location, self.homeLocation) <= turtle.getFuelLevel()) then
+        if self:refuel(self:distanceTo(location) + self:distanceBetween(location, self.homeLocation)) then
             return self:moveTo(location)
         end
         if not self:homeRefuel() then
