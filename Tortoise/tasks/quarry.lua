@@ -46,9 +46,9 @@ if fs.exists(".quarryTask") then
         end
         if args[1] == "startPos" then
             config.startPos = {tonumber(args[2]), tonumber(args[3]), tonumber(args[4])}
-        elseif args[2] == "endPos" then
+        elseif args[1] == "endPos" then
             config.endPos = {tonumber(args[2]), tonumber(args[3]), tonumber(args[4])}
-        elseif args[2] == "nextPos" then
+        elseif args[1] == "nextPos" then
             config.nextPos = {tonumber(args[2]), tonumber(args[3]), tonumber(args[4])}
         end
     end
