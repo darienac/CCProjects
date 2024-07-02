@@ -9,8 +9,8 @@ local function loadFromPath(path, includedPaths)
         if string.sub(line, 1, 3) == "---" then
             if string.sub(line, 1, 11) == "---include " then
                 local baseUrlIdx = string.find(path, "/")
-                local baseUrl = string.sub(path, 1, baseUrlIdx-1)
-                local urlPath = string.sub(path, baseUrlIdx+1)
+                local baseUrl = string.sub(path, 1, baseUrlIdx+1)
+                local urlPath = string.sub(path, baseUrlIdx+3)
                 line = baseUrl .. fs.combine(urlPath, "..", string.sub(line, 12))
                 print(line)
                 if not includedPaths[line] then
