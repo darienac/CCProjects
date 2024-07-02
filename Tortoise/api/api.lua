@@ -34,7 +34,7 @@ local function Tortoise()
         local f = fs.open(self.configPath, "r")
         if not f then
             self:save()
-            return
+            return false
         end
         for line in f.readLine do
             local args = {}
@@ -58,6 +58,7 @@ local function Tortoise()
             end
         end
         f.close()
+        return true
     end
 
     function self:refuel(minAmount)
@@ -305,7 +306,5 @@ local function Tortoise()
         return true
     end
 
-    self:load()
-
-    return self
+    return self, self:load()
 end
