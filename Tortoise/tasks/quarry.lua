@@ -22,7 +22,7 @@ function writeConfigToPath(config)
     local f = fs.open(".quarryTask", "w")
     f.writeLine("startPos " .. config.startPos[1] .. " " .. config.startPos[2] .. " " .. config.startPos[3])
     f.writeLine("endPos " .. config.endPos[1] .. " " .. config.endPos[2] .. " " .. config.endPos[3])
-    f.writeLine("nextPos " .. config.startPos[1] .. " " .. config.startPos[2] .. " " .. config.startPos[3])
+    f.writeLine("nextPos " .. config.nextPos[1] .. " " .. config.nextPos[2] .. " " .. config.nextPos[3])
     f.close()
 end
 
