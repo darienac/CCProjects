@@ -1,6 +1,6 @@
 ---include ../api/api.lua
 
-function getNextPos(prevPos, startPos, endPos)
+local function getNextPos(prevPos, startPos, endPos)
     nextPos = {prevPos[1], prevPos[2], prevPos[3]}
     local xDir = (endPos[1] > startPos[1] and 1) or -1
     local zDir = (endPos[3] > startPos[3] and 1) or -1
@@ -18,7 +18,7 @@ function getNextPos(prevPos, startPos, endPos)
     return nextPos
 end
 
-function writeConfigToPath(config)
+local function writeConfigToPath(config)
     local f = fs.open(".quarryTask", "w")
     f.writeLine("startPos " .. config.startPos[1] .. " " .. config.startPos[2] .. " " .. config.startPos[3])
     f.writeLine("endPos " .. config.endPos[1] .. " " .. config.endPos[2] .. " " .. config.endPos[3])
