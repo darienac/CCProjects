@@ -285,11 +285,11 @@ local function Tortoise()
         if self:refuel(self:distanceTo(location) + self:distanceBetween(location, self.homeLocation)) then
             return self:moveTo(location)
         end
-        if not self:homeRefuel() then
+        if allowDeposit and not self:homeDeposit() then
             return false
         end
-        if allowDeposit then
-            self:homeDeposit()
+        if not self:homeRefuel() then
+            return false
         end
         if self:distanceTo(location) * 2 > turtle.getFuelLevel() then
             return false
