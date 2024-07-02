@@ -1,7 +1,7 @@
 ---include ../api/api.lua
 
-local t, newSetup = Tortoise()
-if newSetup then
+local t, setupExists = Tortoise()
+if not setupExists then
     print("Configure Tortoise API in .tortoise file")
     return
 end
