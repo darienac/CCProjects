@@ -33,6 +33,7 @@ local function Tortoise()
     function self:load()
         local f = fs.open(self.configPath, "r")
         if not f then
+            self:save()
             return
         end
         for line in f.readLine do

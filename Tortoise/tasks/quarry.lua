@@ -1,3 +1,3 @@
 ---include ../api/api.lua
 
-_G.t = Tortoise()
+local t = Tortoise()
