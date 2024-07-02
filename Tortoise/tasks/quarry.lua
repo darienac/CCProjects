@@ -25,12 +25,14 @@ if fs.exists(".quarryTask") then
     end
     f.close()
 else
-    term.write("Enter Quarry Start Coordinates\n(space separated): ")
+    print("Enter Quarry Start Coordinates")
+    term.write("(space separated): ")
     config.startPos = {}
     for word in string.gmatch(read(), "([^%s]+)") do
         table.insert(config.startPos, tonumber(word))
     end
-    term.write("Enter Quarry End Coordinates\n(space separated): ")
+    print("Enter Quarry End Coordinates")
+    term.write("(space separated): ")
     config.endPos = {}
     for word in string.gmatch(read(), "([^%s]+)") do
         table.insert(config.endPos, tonumber(word))
