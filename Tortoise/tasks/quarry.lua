@@ -18,6 +18,14 @@ function getNextPos(prevPos, startPos, endPos)
     return nextPos
 end
 
+function writeConfigToPath(config)
+    local f = fs.open(".quarryTask", "w")
+    f.writeLine("startPos " .. config.startPos[1] .. " " .. config.startPos[2] .. " " .. config.startPos[3])
+    f.writeLine("endPos " .. config.endPos[1] .. " " .. config.endPos[2] .. " " .. config.endPos[3])
+    f.writeLine("nextPos " .. config.startPos[1] .. " " .. config.startPos[2] .. " " .. config.startPos[3])
+    f.close()
+end
+
 local t, setupExists = Tortoise()
 if not setupExists then
     print("Configure Tortoise API in .tortoise file")
@@ -59,16 +67,13 @@ else
     for word in string.gmatch(read(), "([^%s]+)") do
         table.insert(config.endPos, tonumber(word))
     end
-    local f = fs.open(".quarryTask", "w")
-    f.writeLine("startPos " .. config.startPos[1] .. " " .. config.startPos[2] .. " " .. config.startPos[3])
-    f.writeLine("endPos " .. config.endPos[1] .. " " .. config.endPos[2] .. " " .. config.endPos[3])
-    f.writeLine("nextPos " .. config.startPos[1] .. " " .. config.startPos[2] .. " " .. config.startPos[3])
-    f.close()
+    writeConfigToPath(config)
 end
 
-while true do
+local complete = false
+while not complete do
     if config.nextPos[1] == config.endPos[1] and config.nextPos[2] == config.endPos[2] and config.nextPos[3] == config.endPos[3] then
-        break
+        complete = true
     end
     if t:isFull() then
         if not t:homeDeposit() then
@@ -81,7 +86,10 @@ while true do
         return
     end
     turtle.digDown()
-    config.nextPos = getNextPos(config.nextPos, config.startPos, config.endPos)
+    if not complete then
+        config.nextPos = getNextPos(config.nextPos, config.startPos, config.endPos)
+        writeConfigToPath(config)
+    end
 end
 fs.delete(".quarryTask")
 if not t:homeDeposit() then
