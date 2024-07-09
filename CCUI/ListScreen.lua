@@ -7,7 +7,7 @@ local function ListScreen(titleBar, options)
     }
 
     function self:draw(out)
-        self.titleBar.draw(out)
+        self.titleBar:draw(out)
     end
 
     return self
