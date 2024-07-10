@@ -17,7 +17,7 @@ local function ListScreen(titleBar, options)
         out.write("^")
         out.setCursorPos(w, h-1)
         out.write("v")
-        for i=1+scroll,h-1+scroll do
+        for i=1+self.scroll,h-1+self.scroll do
             if self.options[i] then
                 local bg = 0
                 local fg = 0
